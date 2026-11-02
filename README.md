@@ -1,0 +1,2 @@
+# Two Player Chess Game
+It is a two player browser chess game which features move generation & highlight for all pieces; check, checkmate and draw detection; legal position check; castle and castling right check; enpassant and pawn promotion. It is entirely made JavaScript HTML, CSS and JavaScript only. 
