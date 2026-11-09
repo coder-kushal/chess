@@ -17,7 +17,7 @@ body {
     width: 100%;
     background: linear-gradient(0deg,  #11172a, rgb(13, 75, 75));
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 30px;
     color: wheat;
@@ -296,3 +296,44 @@ body {
     50% { transform: translateY(-10px); }
 }
 
+@media (max-width: 750px) {
+    .container {
+        flex-direction: column;
+        gap: 0px;
+    }
+    .board_container {
+        width: 100%;
+        height: 82%;
+    }
+    .notations {
+        display: none;
+    }
+    .extra-info {
+        border-left: none;
+        background: transparent;
+        width: 100%;
+        height: 18%;
+    }
+    .game_button {
+        margin: 0 8px;
+    }
+
+    @media (max-width: 450px) {
+        .board {
+            height: 280px;
+            width: 280px;
+            border: 5px solid black;
+        }
+        .square {
+            height: 35px;
+            width: 35px;
+        }
+        .piece {
+            height: 35px;
+        }
+        .highlight::after {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

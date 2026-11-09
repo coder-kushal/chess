@@ -19,6 +19,7 @@ const storedMoves = []; // stores every last move
 const storedPositions = []; // stores all positions
 const storeNotations = []; // stores all notations
 const notations = document.querySelector(".notations");
+const count = arr => arr.filter(p => p !== "").length;
 let w_s_c_right = true;
 let w_l_c_right = true;
 let b_s_c_right = true;
@@ -46,7 +47,6 @@ function removeClass() {
 }
 
 function storeMoves(selected, i) {
-    const count = arr => arr.filter(p => p !== "").length;
     last_move.piece = `${selected.querySelector("img").getAttribute("src")}`.split("/")[1].split(".")[0].split("-")[0];
     last_move.color = `${selected.querySelector("img").getAttribute("src")}`.split("/")[1].split(".")[0].split("-")[1];
     last_move.from = square.indexOf(selected);
@@ -462,6 +462,12 @@ function checkGameOver() {
             how.innerText = "by 50 MOVE RULE";
             no_of_moves.innerText = Math.ceil(storedMoves.length / 2);
         }
+        if (isInsufficientMaterial()) {
+            showWinnerPopup();
+            who.innerText = "Draw!";
+            how.innerText = "by INSUFFICIENT MATERIAL";
+            no_of_moves.innerText = Math.ceil(storedMoves.length / 2);
+        }
     }
     else {
         let check = isCheck();
@@ -662,4 +668,18 @@ function undo() {
     removeClass();
     clearTimeout(promoTimer);
     clearTimeout(gameOverTimer);
+}
+
+function isInsufficientMaterial() {
+    const pieceCount = count(pieces);
+    if (pieceCount === 2) return true;
+    else if (pieceCount === 3) {
+        const minorPieces = pieces.filter(p => p.includes("knight") || p.includes("bishop"));
+        if (minorPieces.length === 1) return true;
+    }
+    else if (pieceCount === 4) {
+        const minorPieces = pieces.filter(p=>p.includes("knight"));
+        if (minorPieces.length === 2) return true;
+    }
+    return false;
 }
